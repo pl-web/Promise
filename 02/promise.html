@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. create
+    const p = new Promise((resolve, reject) => { // 执行器函数, 执行异步任务
+      // 2. execute async code
+      setTimeout(() => {
+        const t = Date.now();
+        if (t % 2 === 0) {
+          resolve(`this is even time ${t}`);
+        } else {
+          reject(`this is odd time ${t}`);
+        }
+      }, 1000);
+      // 3. change status
+      // success =>  resolve(value)
+      // error =>  reject(reason)
+    });
+    p.then(
+      value => { // onResolved
+        console.log('success', value);
+      },
+      reason => { // onRejected
+        console.log('error', reason);
+      }
+    );
+  </script>
+</body>
+</html>
