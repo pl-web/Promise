@@ -10,6 +10,8 @@
   <script>
     // 1. create
     const p = new Promise((resolve, reject) => { // 执行器函数, 执行异步任务
+      console.log('执行器先执行'); // 执行器函数是同步回调
+      // 此时异步任务已经启动
       // 2. execute async code
       setTimeout(() => {
         const t = Date.now();
@@ -23,14 +25,27 @@
       // success =>  resolve(value)
       // error =>  reject(reason)
     });
+    console.log('New Promise操作之后执行');
     p.then(
       value => { // onResolved
+        // 成功回调
+        console.log('成功回调执行');
         console.log('success', value);
       },
       reason => { // onRejected
+        // 失败回调
+        console.log('失败回调执行');
         console.log('error', reason);
       }
     );
+
+    // 某次执行结果
+    /*
+      执行器先执行
+      New Promise操作之后执行
+      成功回调执行
+      success this is even time 1625287791660
+    */
   </script>
 </body>
 </html>
